@@ -1,13 +1,10 @@
-[gd_scene load_steps=16 format=3 uid="uid://qga0inchn5hm"]
+[gd_scene load_steps=17 format=3 uid="uid://qga0inchn5hm"]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_hum2r"]
 [ext_resource type="Texture2D" uid="uid://dtsd2b30yk87g" path="res://assets/Sprite Pack 2/2 - Mr. Mochi/Hurt (32 x 32).png" id="2_3u587"]
 [ext_resource type="Texture2D" uid="uid://dwfplwl882tw2" path="res://assets/Sprite Pack 2/2 - Mr. Mochi/Idle (32 x 32).png" id="2_dqmle"]
 [ext_resource type="Texture2D" uid="uid://cimgd57ultndr" path="res://assets/Sprite Pack 2/2 - Mr. Mochi/Running (32 x 32).png" id="3_6raja"]
 [ext_resource type="Texture2D" uid="uid://chv5ac1piuono" path="res://assets/Sprite Pack 2/2 - Mr. Mochi/Jumping (32 x 32).png" id="4_5sa52"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_w0pdb"]
-size = Vector2(14, 14)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_g84oa"]
 atlas = ExtResource("2_3u587")
@@ -88,18 +85,17 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_w0pdb"]
+size = Vector2(14, 14)
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_urhwt"]
+
 [node name="player" type="CharacterBody2D"]
 position = Vector2(0, -16)
 collision_mask = 6
 script = ExtResource("1_hum2r")
 
-[node name="collision" type="CollisionShape2D" parent="."]
-visible = false
-position = Vector2(0, 8)
-shape = SubResource("RectangleShape2D_w0pdb")
-
 [node name="camera" type="Camera2D" parent="."]
-visible = false
 limit_left = 0
 limit_bottom = 200
 
@@ -108,4 +104,12 @@ sprite_frames = SubResource("SpriteFrames_ucduo")
 animation = &"idle"
 autoplay = "idle"
 
+[node name="collision" type="CollisionShape2D" parent="."]
+visible = false
+position = Vector2(0, 8)
+shape = SubResource("RectangleShape2D_w0pdb")
+
 [node name="animator" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_urhwt")
+}
