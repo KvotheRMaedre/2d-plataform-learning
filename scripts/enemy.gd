@@ -5,6 +5,7 @@ const JUMP_VELOCITY = -400.0
 
 @onready var wall_detector := $wall_detector as RayCast2D
 @onready var texture := $texture as Sprite2D
+@onready var anime:= $anime as AnimationPlayer
 var direction := -1
 
 func _physics_process(delta: float) -> void:
@@ -19,6 +20,4 @@ func _physics_process(delta: float) -> void:
 	
 	velocity.x = direction * SPEED * delta
 	
-	
-
 	move_and_slide()

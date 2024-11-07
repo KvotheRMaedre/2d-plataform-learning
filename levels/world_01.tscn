@@ -1,6 +1,7 @@
-[gd_scene load_steps=20 format=3 uid="uid://6tk1j4efopug"]
+[gd_scene load_steps=21 format=3 uid="uid://6tk1j4efopug"]
 
 [ext_resource type="Texture2D" uid="uid://cs1a0sytmp4yo" path="res://assets/Seasonal Tilesets/1 - Grassland/Terrain (16 x 16).png" id="1_1aga6"]
+[ext_resource type="Script" path="res://scripts/world_01.gd" id="1_8vkiv"]
 [ext_resource type="Texture2D" uid="uid://dov6k7lbtgq6x" path="res://assets/Seasonal Tilesets/1 - Grassland/Grassland_entities (16 x 16).png" id="2_a7m7a"]
 [ext_resource type="PackedScene" uid="uid://dvjtd4r151hl5" path="res://prefabs/coin.tscn" id="3_kk3du"]
 [ext_resource type="PackedScene" uid="uid://qga0inchn5hm" path="res://actors/player.tscn" id="3_r26oc"]
@@ -123,6 +124,7 @@ shader = ExtResource("6_ms6fg")
 shader_parameter/move_speed = 0.05
 
 [node name="World-01" type="Node2D"]
+script = ExtResource("1_8vkiv")
 
 [node name="level" type="TileMap" parent="."]
 position = Vector2(7, 1)
@@ -228,5 +230,20 @@ scale = Vector2(1.5, 1.5)
 texture = ExtResource("8_eyexb")
 centered = false
 
-[node name="enemy" parent="." instance=ExtResource("12_nl065")]
-position = Vector2(427, 94)
+[node name="camera" type="Camera2D" parent="."]
+limit_left = 0
+limit_bottom = 200
+
+[node name="enemies" type="Node2D" parent="."]
+
+[node name="enemy" parent="enemies" instance=ExtResource("12_nl065")]
+position = Vector2(340, 160)
+
+[node name="enemy2" parent="enemies" instance=ExtResource("12_nl065")]
+position = Vector2(378, 158)
+
+[node name="enemy3" parent="enemies" instance=ExtResource("12_nl065")]
+position = Vector2(232, 152)
+
+[node name="enemy4" parent="enemies" instance=ExtResource("12_nl065")]
+position = Vector2(175, 153)
