@@ -104,6 +104,7 @@ animation = &"idle"
 autoplay = "idle"
 
 [node name="collision" type="CollisionShape2D" parent="."]
+visible = false
 position = Vector2(0, 8)
 shape = SubResource("RectangleShape2D_w0pdb")
 
@@ -113,6 +114,7 @@ libraries = {
 }
 
 [node name="hurtbox" type="Area2D" parent="."]
+visible = false
 collision_layer = 32
 collision_mask = 4
 
@@ -122,5 +124,18 @@ shape = SubResource("RectangleShape2D_qebh7")
 debug_color = Color(0.527737, 0.566466, 0.227552, 0.42)
 
 [node name="remote" type="RemoteTransform2D" parent="."]
+remote_path = NodePath("..")
+
+[node name="raycast_right" type="RayCast2D" parent="."]
+position = Vector2(8, 9)
+target_position = Vector2(4, 0)
+collision_mask = 4
+hit_from_inside = true
+
+[node name="raycast_left" type="RayCast2D" parent="."]
+position = Vector2(-8, 9)
+target_position = Vector2(-4, 0)
+collision_mask = 4
+hit_from_inside = true
 
 [connection signal="body_entered" from="hurtbox" to="." method="_on_hurtbox_body_entered"]
