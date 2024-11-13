@@ -86,3 +86,12 @@ func _set_state():
 
 	if animation.name != state:
 		animation.play(state)
+
+
+func _on_head_collider_body_entered(body: Node2D) -> void:
+	if body.has_method("break_sprite"):
+		if body.hitpoints >= 1:
+			body.hitpoints -= 1
+			body.animation.play("hit")
+		else:
+			body.break_sprite()

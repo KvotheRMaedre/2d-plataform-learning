@@ -1,0 +1,14 @@
+[gd_scene load_steps=2 format=3 uid="uid://bj5r2fjh5ihes"]
+
+[ext_resource type="Script" path="res://scripts/box_pieces.gd" id="1_pey4i"]
+
+[node name="box-pieces" type="RigidBody2D"]
+collision_layer = 64
+collision_mask = 3
+script = ExtResource("1_pey4i")
+
+[node name="texture" type="Sprite2D" parent="."]
+
+[node name="notifier" type="VisibleOnScreenNotifier2D" parent="."]
+
+[connection signal="screen_exited" from="notifier" to="." method="_on_notifier_screen_exited"]
