@@ -41,8 +41,12 @@ func _physics_process(delta: float) -> void:
 		velocity = knockback_vector
 	
 	_set_state()
-	
 	move_and_slide()
+	
+	for plataforms in get_slide_collision_count():
+		var collision = get_slide_collision(plataforms)
+		if collision.get_collider().has_method("has_collided_with"):
+			collision.get_collider().has_collided_with(collision, self)
 
 
 func _on_hurtbox_body_entered(_body: Node2D) -> void:
