@@ -45,7 +45,7 @@ func _physics_process(delta: float) -> void:
 	move_and_slide()
 
 
-func _on_hurtbox_body_entered(body: Node2D) -> void:
+func _on_hurtbox_body_entered(_body: Node2D) -> void:
 	if player_life <= 0:
 		queue_free()
 	else:
@@ -95,3 +95,4 @@ func _on_head_collider_body_entered(body: Node2D) -> void:
 			body.animation.play("hit")
 		else:
 			body.break_sprite()
+		body.create_coin()
