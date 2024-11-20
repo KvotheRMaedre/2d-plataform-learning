@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=3 uid="uid://6tk1j4efopug"]
+[gd_scene load_steps=42 format=3 uid="uid://6tk1j4efopug"]
 
 [ext_resource type="Texture2D" uid="uid://cs1a0sytmp4yo" path="res://assets/Seasonal Tilesets/1 - Grassland/Terrain (16 x 16).png" id="1_1aga6"]
 [ext_resource type="Script" path="res://scripts/world_01.gd" id="1_8vkiv"]
@@ -25,6 +25,12 @@
 [ext_resource type="Script" path="res://scripts/warning_sign.gd" id="22_yo43t"]
 [ext_resource type="Script" path="res://scripts/spike_area.gd" id="24_3tjqt"]
 [ext_resource type="Texture2D" uid="uid://bl6pvkby4avvd" path="res://assets/brick-pieces/Spike.png" id="24_afqbx"]
+[ext_resource type="Texture2D" uid="uid://dx2pbvaai0uf8" path="res://assets/Mini FX, Items & UI/Common Pick-ups/Coin Sprite/00_Coin-Sprites.png" id="26_hyq1a"]
+[ext_resource type="Texture2D" uid="uid://c5kvxg6y7guh8" path="res://assets/Mini FX, Items & UI/Common Pick-ups/Coin Sprite/01_Coin-Sprites.png" id="27_1qyng"]
+[ext_resource type="Texture2D" uid="uid://cltsjnevojd7s" path="res://assets/Mini FX, Items & UI/Common Pick-ups/Coin Sprite/02_Coin-Sprites.png" id="28_2gl0y"]
+[ext_resource type="Texture2D" uid="uid://ce4oeo8xfnpep" path="res://assets/Mini FX, Items & UI/Common Pick-ups/Coin Sprite/03_Coin-Sprites.png" id="29_2ia4s"]
+[ext_resource type="FontFile" uid="uid://b3xf52ob2f75l" path="res://assets/font/RevMiniPixel.ttf" id="30_kl7dx"]
+[ext_resource type="Texture2D" uid="uid://deiwo5uigs4im" path="res://assets/Mini FX, Items & UI/Common Pick-ups/Life-Counter-Icon.png" id="31_damo6"]
 
 [sub_resource type="TileMapPattern" id="TileMapPattern_t5ild"]
 tile_data = PackedInt32Array(0, 65537, 1)
@@ -142,6 +148,16 @@ shader_parameter/move_speed = 0.05
 size = Vector2(22, 20)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_yyjf5"]
+
+[sub_resource type="AnimatedTexture" id="AnimatedTexture_janvu"]
+frames = 4
+frame_0/texture = ExtResource("26_hyq1a")
+frame_1/texture = ExtResource("27_1qyng")
+frame_1/duration = 1.0
+frame_2/texture = ExtResource("28_2gl0y")
+frame_2/duration = 1.0
+frame_3/texture = ExtResource("29_2ia4s")
+frame_3/duration = 1.0
 
 [node name="World-01" type="Node2D"]
 script = ExtResource("1_8vkiv")
@@ -274,6 +290,7 @@ position = Vector2(232, 152)
 position = Vector2(175, 153)
 
 [node name="controls" type="CanvasLayer" parent="."]
+visible = false
 
 [node name="ui_left" type="TouchScreenButton" parent="controls"]
 position = Vector2(9, 122)
@@ -330,5 +347,122 @@ texture_repeat = 2
 texture = ExtResource("24_afqbx")
 region_enabled = true
 region_rect = Rect2(0, 8, 176, 8)
+
+[node name="HUD" type="CanvasLayer" parent="."]
+
+[node name="control" type="Control" parent="HUD"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="container" type="MarginContainer" parent="HUD/control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="coins_container" type="HBoxContainer" parent="HUD/control/container"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+
+[node name="coins_icon" type="TextureRect" parent="HUD/control/container/coins_container"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+texture = SubResource("AnimatedTexture_janvu")
+
+[node name="coins_counter" type="Label" parent="HUD/control/container/coins_container"]
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 4
+theme_override_fonts/font = ExtResource("30_kl7dx")
+theme_override_font_sizes/font_size = 8
+text = "0000"
+vertical_alignment = 1
+
+[node name="score_container" type="HBoxContainer" parent="HUD/control/container"]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 0
+
+[node name="score_label" type="Label" parent="HUD/control/container/score_container"]
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 4
+theme_override_fonts/font = ExtResource("30_kl7dx")
+theme_override_font_sizes/font_size = 8
+text = "SCORE:"
+vertical_alignment = 1
+
+[node name="score_counter" type="Label" parent="HUD/control/container/score_container"]
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 4
+theme_override_fonts/font = ExtResource("30_kl7dx")
+theme_override_font_sizes/font_size = 8
+text = "000000"
+vertical_alignment = 1
+
+[node name="timer_container" type="HBoxContainer" parent="HUD/control/container"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+
+[node name="timer_label" type="Label" parent="HUD/control/container/timer_container"]
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 4
+theme_override_fonts/font = ExtResource("30_kl7dx")
+theme_override_font_sizes/font_size = 8
+text = "TIME:"
+vertical_alignment = 1
+
+[node name="timer_counter" type="Label" parent="HUD/control/container/timer_container"]
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 4
+theme_override_fonts/font = ExtResource("30_kl7dx")
+theme_override_font_sizes/font_size = 8
+text = "00:00"
+vertical_alignment = 1
+
+[node name="life_container" type="HBoxContainer" parent="HUD/control/container"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 8
+
+[node name="life_icon" type="TextureRect" parent="HUD/control/container/life_container"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+texture = ExtResource("31_damo6")
+
+[node name="life_separator" type="Label" parent="HUD/control/container/life_container"]
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 4
+theme_override_fonts/font = ExtResource("30_kl7dx")
+theme_override_font_sizes/font_size = 8
+text = "X"
+vertical_alignment = 1
+
+[node name="life_counter" type="Label" parent="HUD/control/container/life_container"]
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 4
+theme_override_fonts/font = ExtResource("30_kl7dx")
+theme_override_font_sizes/font_size = 8
+text = "03"
+vertical_alignment = 1
 
 [connection signal="body_entered" from="spike-area" to="spike-area" method="_on_body_entered"]
