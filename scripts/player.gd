@@ -48,7 +48,6 @@ func _physics_process(delta: float) -> void:
 		if collision.get_collider().has_method("has_collided_with"):
 			collision.get_collider().has_collided_with(collision, self)
 
-
 func _on_hurtbox_body_entered(_body: Node2D) -> void:
 	if player_life <= 0:
 		queue_free()
@@ -90,7 +89,6 @@ func _set_state():
 
 	if animation.name != state:
 		animation.play(state)
-
 
 func _on_head_collider_body_entered(body: Node2D) -> void:
 	if body.has_method("break_sprite"):

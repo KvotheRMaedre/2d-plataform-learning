@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=3 uid="uid://6tk1j4efopug"]
+[gd_scene load_steps=32 format=3 uid="uid://6tk1j4efopug"]
 
 [ext_resource type="Texture2D" uid="uid://cs1a0sytmp4yo" path="res://assets/Seasonal Tilesets/1 - Grassland/Terrain (16 x 16).png" id="1_1aga6"]
 [ext_resource type="Script" path="res://scripts/world_01.gd" id="1_8vkiv"]
@@ -21,6 +21,8 @@
 [ext_resource type="Texture2D" uid="uid://du01soj57fr0w" path="res://assets/mini_ui_buttons/ui_buttons_arrow_up_NORMAL.png" id="18_yatbf"]
 [ext_resource type="Texture2D" uid="uid://djou2mworlukp" path="res://assets/mini_ui_buttons/ui_buttons_arrow_up_PRESSED.png" id="19_p5tio"]
 [ext_resource type="PackedScene" uid="uid://bg7wob6neh807" path="res://prefabs/breakable_box.tscn" id="20_fee6q"]
+[ext_resource type="Texture2D" uid="uid://weh8elslh502" path="res://assets/Mini FX, Items & UI/Mini UI/Speech_Emotes (16 x 16).png" id="22_581dc"]
+[ext_resource type="Script" path="res://scripts/warning_sign.gd" id="22_yo43t"]
 
 [sub_resource type="TileMapPattern" id="TileMapPattern_t5ild"]
 tile_data = PackedInt32Array(0, 65537, 1)
@@ -49,8 +51,12 @@ texture = ExtResource("1_1aga6")
 11:2/0 = 0
 1:3/0 = 0
 1:3/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+2:3/next_alternative_id = 4
 2:3/0 = 0
 2:3/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+2:3/1 = 1
+2:3/2 = 2
+2:3/3 = 3
 3:3/0 = 0
 3:3/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 4:3/0 = 0
@@ -119,8 +125,7 @@ texture = ExtResource("2_a7m7a")
 5:1/0 = 0
 
 [sub_resource type="TileSet" id="TileSet_jycjq"]
-physics_layer_0/collision_layer = 3
-physics_layer_0/collision_mask = 0
+physics_layer_0/collision_layer = 2
 sources/0 = SubResource("TileSetAtlasSource_48wca")
 sources/1 = SubResource("TileSetAtlasSource_5o4y4")
 pattern_0 = SubResource("TileMapPattern_t5ild")
@@ -131,10 +136,15 @@ pattern_2 = SubResource("TileMapPattern_pxq24")
 shader = ExtResource("6_ms6fg")
 shader_parameter/move_speed = 0.05
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ixn3b"]
+size = Vector2(22, 20)
+
 [node name="World-01" type="Node2D"]
 script = ExtResource("1_8vkiv")
 
 [node name="level" type="TileMap" parent="."]
+light_mask = 0
+visibility_layer = 2
 position = Vector2(7, 1)
 tile_set = SubResource("TileSet_jycjq")
 format = 2
@@ -260,7 +270,6 @@ position = Vector2(232, 152)
 position = Vector2(175, 153)
 
 [node name="controls" type="CanvasLayer" parent="."]
-visible = false
 
 [node name="ui_left" type="TouchScreenButton" parent="controls"]
 position = Vector2(9, 122)
@@ -285,3 +294,21 @@ visibility_mode = 1
 
 [node name="breakable-box" parent="." instance=ExtResource("20_fee6q")]
 position = Vector2(402, 109)
+
+[node name="warning_sign" type="Node2D" parent="."]
+position = Vector2(285, 100)
+script = ExtResource("22_yo43t")
+
+[node name="texture" type="Sprite2D" parent="warning_sign"]
+position = Vector2(1, -14)
+texture = ExtResource("22_581dc")
+region_enabled = true
+region_rect = Rect2(0, 0, 16, 16)
+
+[node name="area_sign" type="Area2D" parent="warning_sign"]
+position = Vector2(1, -14)
+collision_layer = 2
+
+[node name="collision" type="CollisionShape2D" parent="warning_sign/area_sign"]
+position = Vector2(1, 17)
+shape = SubResource("RectangleShape2D_ixn3b")
