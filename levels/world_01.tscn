@@ -1,4 +1,4 @@
-[gd_scene load_steps=42 format=3 uid="uid://6tk1j4efopug"]
+[gd_scene load_steps=43 format=3 uid="uid://6tk1j4efopug"]
 
 [ext_resource type="Texture2D" uid="uid://cs1a0sytmp4yo" path="res://assets/Seasonal Tilesets/1 - Grassland/Terrain (16 x 16).png" id="1_1aga6"]
 [ext_resource type="Script" path="res://scripts/world_01.gd" id="1_8vkiv"]
@@ -26,6 +26,7 @@
 [ext_resource type="Script" path="res://scripts/spike_area.gd" id="24_3tjqt"]
 [ext_resource type="Texture2D" uid="uid://bl6pvkby4avvd" path="res://assets/brick-pieces/Spike.png" id="24_afqbx"]
 [ext_resource type="Texture2D" uid="uid://dx2pbvaai0uf8" path="res://assets/Mini FX, Items & UI/Common Pick-ups/Coin Sprite/00_Coin-Sprites.png" id="26_hyq1a"]
+[ext_resource type="Script" path="res://scripts/hud_manager.gd" id="26_x3ymd"]
 [ext_resource type="Texture2D" uid="uid://c5kvxg6y7guh8" path="res://assets/Mini FX, Items & UI/Common Pick-ups/Coin Sprite/01_Coin-Sprites.png" id="27_1qyng"]
 [ext_resource type="Texture2D" uid="uid://cltsjnevojd7s" path="res://assets/Mini FX, Items & UI/Common Pick-ups/Coin Sprite/02_Coin-Sprites.png" id="28_2gl0y"]
 [ext_resource type="Texture2D" uid="uid://ce4oeo8xfnpep" path="res://assets/Mini FX, Items & UI/Common Pick-ups/Coin Sprite/03_Coin-Sprites.png" id="29_2ia4s"]
@@ -151,6 +152,7 @@ size = Vector2(22, 20)
 
 [sub_resource type="AnimatedTexture" id="AnimatedTexture_janvu"]
 frames = 4
+speed_scale = 3.0
 frame_0/texture = ExtResource("26_hyq1a")
 frame_1/texture = ExtResource("27_1qyng")
 frame_1/duration = 1.0
@@ -285,9 +287,11 @@ position = Vector2(378, 158)
 
 [node name="enemy3" parent="enemies" instance=ExtResource("12_nl065")]
 position = Vector2(232, 152)
+enemy_points = 200
 
 [node name="enemy4" parent="enemies" instance=ExtResource("12_nl065")]
 position = Vector2(175, 153)
+enemy_points = 200
 
 [node name="controls" type="CanvasLayer" parent="."]
 visible = false
@@ -357,6 +361,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("26_x3ymd")
 
 [node name="container" type="MarginContainer" parent="HUD/control"]
 layout_mode = 1
