@@ -300,6 +300,7 @@ position = Vector2(285, 100)
 script = ExtResource("22_yo43t")
 
 [node name="texture" type="Sprite2D" parent="warning_sign"]
+visible = false
 position = Vector2(1, -14)
 texture = ExtResource("22_581dc")
 region_enabled = true
