@@ -1,6 +1,6 @@
 extends Node2D
 
-const WAIT_DURATION := 1.0
+const WAIT_DURATION := 2.0
 
 @onready var plataform := $plataform as AnimatableBody2D
 @export var move_speed := 4.0
@@ -24,4 +24,4 @@ func move_plataform():
 	
 	var plataform_tween = create_tween().set_loops().set_trans(Tween.TRANS_LINEAR).set_ease(Tween.EASE_IN_OUT)
 	plataform_tween.tween_property(self, "follow", move_direction, duration).set_delay(WAIT_DURATION)
-	plataform_tween.tween_property(self, "follow", Vector2.ZERO, duration).set_delay(duration * WAIT_DURATION * 2)
+	plataform_tween.tween_property(self, "follow", Vector2.ZERO, duration).set_delay(WAIT_DURATION)
