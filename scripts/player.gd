@@ -9,11 +9,12 @@ const JUMP_VELOCITY = -350.0
 @onready var raycast_right := $raycast_right as RayCast2D
 @onready var raycast_left := $raycast_left as RayCast2D
 
-var player_life := 3
 var knockback_vector := Vector2.ZERO
 var is_jumping := false
 var is_hurted := false
 var direction
+
+signal player_has_died()
 
 func _physics_process(delta: float) -> void:
 	# Add the gravity.
@@ -59,10 +60,11 @@ func follow_camera(camera):
 	remote_transform.remote_path = camera_path
 
 func take_damage(knockback_force := Vector2.ZERO, duration := 0.25):
-	if player_life > 0:
-		player_life -= 1
+	if Globals.player_life > 0:
+		Globals.player_life -= 1
 	else:
 		queue_free()
+		emit_signal("player_has_died")
 	
 	if knockback_force != Vector2.ZERO:
 		knockback_vector = knockback_force
