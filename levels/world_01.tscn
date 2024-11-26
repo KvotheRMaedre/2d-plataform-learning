@@ -1,4 +1,4 @@
-[gd_scene load_steps=46 format=3 uid="uid://6tk1j4efopug"]
+[gd_scene load_steps=47 format=3 uid="uid://6tk1j4efopug"]
 
 [ext_resource type="Texture2D" uid="uid://cs1a0sytmp4yo" path="res://assets/Seasonal Tilesets/1 - Grassland/Terrain (16 x 16).png" id="1_1aga6"]
 [ext_resource type="Script" path="res://scripts/world_01.gd" id="1_8vkiv"]
@@ -34,6 +34,7 @@
 [ext_resource type="FontFile" uid="uid://b3xf52ob2f75l" path="res://assets/font/RevMiniPixel.ttf" id="30_kl7dx"]
 [ext_resource type="Texture2D" uid="uid://deiwo5uigs4im" path="res://assets/Mini FX, Items & UI/Common Pick-ups/Life-Counter-Icon.png" id="31_damo6"]
 [ext_resource type="PackedScene" uid="uid://dm4bd7qlr5ni2" path="res://actors/base_patrol.tscn" id="34_s8lid"]
+[ext_resource type="PackedScene" uid="uid://c4ir0ul6d3p52" path="res://actors/cherry.tscn" id="35_w5ucn"]
 
 [sub_resource type="TileMapPattern" id="TileMapPattern_t5ild"]
 tile_data = PackedInt32Array(0, 65537, 1)
@@ -490,6 +491,9 @@ vertical_alignment = 1
 
 [node name="base_patrol" parent="." instance=ExtResource("34_s8lid")]
 position = Vector2(990, 133)
+
+[node name="cherry" parent="." instance=ExtResource("35_w5ucn")]
+position = Vector2(1066, 113)
 
 [connection signal="body_entered" from="spike-area" to="spike-area" method="_on_body_entered"]
 [connection signal="timeout" from="HUD/control/clock_timer" to="HUD/control" method="_on_clock_timer_timeout"]
