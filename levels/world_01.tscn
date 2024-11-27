@@ -379,7 +379,7 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("26_x3ymd")
 default_minutes = 0
-default_seconds = 5
+default_seconds = 20
 
 [node name="clock_timer" type="Timer" parent="HUD/control"]
 autostart = true
@@ -499,6 +499,9 @@ position = Vector2(1066, 113)
 
 [node name="checkpoint" parent="." instance=ExtResource("36_cl3i3")]
 position = Vector2(683, 145)
+
+[node name="start_player_position" type="Marker2D" parent="."]
+position = Vector2(58, 8)
 
 [connection signal="body_entered" from="spike-area" to="spike-area" method="_on_body_entered"]
 [connection signal="timeout" from="HUD/control/clock_timer" to="HUD/control" method="_on_clock_timer_timeout"]
