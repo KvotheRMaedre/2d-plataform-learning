@@ -54,6 +54,8 @@ func _on_hurtbox_body_entered(_body: Node2D) -> void:
 		take_damage(Vector2(-200,-200))
 	elif raycast_left.is_colliding():
 		take_damage(Vector2(200,-200))
+	else:
+		take_damage(Vector2(200,-200))
 
 func follow_camera(camera):
 	var camera_path = camera.get_path()
