@@ -38,5 +38,5 @@ func _on_respawn_timer_timeout() -> void:
 	if is_triggered:
 		var spawn_tween = create_tween().set_trans(Tween.TRANS_BOUNCE).set_ease(Tween.EASE_IN_OUT)
 		spawn_tween.tween_property(texture, "scale", Vector2(1,1), 0.2).from(Vector2(0,0))
-	
+		spawn_tween.bind_node(self)
 	is_triggered = false

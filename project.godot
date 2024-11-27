@@ -20,6 +20,10 @@ config/icon="res://icon.svg"
 DialogManager="*res://singletons/dialog_manager.gd"
 Globals="*res://singletons/globals.gd"
 
+[debug]
+
+gdscript/warnings/unused_signal=0
+
 [display]
 
 window/size/viewport_width=640

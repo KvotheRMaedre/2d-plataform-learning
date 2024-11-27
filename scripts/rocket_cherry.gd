@@ -8,5 +8,5 @@ func _ready() -> void:
 	can_spawn = true
 	anim.animation_finished.connect(kill_air_enemy)
 
-func _on_hitbox_body_entered(body: Node2D) -> void:
+func _on_hitbox_body_entered(_body: Node2D) -> void:
 	anim.play("hurt")

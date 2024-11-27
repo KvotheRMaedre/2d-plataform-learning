@@ -18,7 +18,7 @@ func _process(_delta: float) -> void:
 
 func reload_game():
 	await get_tree().create_timer(1.0).timeout
-	var player = player_scene.instantiate()
+	player = player_scene.instantiate()
 	add_child(player)
 	Globals.player = player
 	Globals.player.follow_camera(camera)

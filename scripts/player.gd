@@ -75,7 +75,7 @@ func take_damage(knockback_force := Vector2.ZERO, duration := 0.25):
 		knockback_tween.tween_property(self, "knockback_vector", Vector2.ZERO, duration)
 		animation.modulate = Color("red")
 		knockback_tween.parallel().tween_property(animation, "modulate", Color(1,1,1,1), duration)
-		
+		knockback_tween.bind_node(self)
 		is_hurted = true
 		await get_tree().create_timer(.3).timeout
 		is_hurted = false
