@@ -1,4 +1,4 @@
-[gd_scene load_steps=48 format=3 uid="uid://6tk1j4efopug"]
+[gd_scene load_steps=49 format=3 uid="uid://6tk1j4efopug"]
 
 [ext_resource type="Texture2D" uid="uid://cs1a0sytmp4yo" path="res://assets/Seasonal Tilesets/1 - Grassland/Terrain (16 x 16).png" id="1_1aga6"]
 [ext_resource type="Script" path="res://scripts/world_01.gd" id="1_8vkiv"]
@@ -36,6 +36,7 @@
 [ext_resource type="PackedScene" uid="uid://dm4bd7qlr5ni2" path="res://actors/base_patrol.tscn" id="34_s8lid"]
 [ext_resource type="PackedScene" uid="uid://c4ir0ul6d3p52" path="res://actors/cherry.tscn" id="35_w5ucn"]
 [ext_resource type="PackedScene" uid="uid://byrm3x20mpceg" path="res://prefabs/checkpoint.tscn" id="36_cl3i3"]
+[ext_resource type="PackedScene" uid="uid://cq8muiaenj6w4" path="res://prefabs/pause_menu.tscn" id="37_w3t72"]
 
 [sub_resource type="TileMapPattern" id="TileMapPattern_t5ild"]
 tile_data = PackedInt32Array(0, 65537, 1)
@@ -502,6 +503,9 @@ position = Vector2(683, 145)
 
 [node name="start_player_position" type="Marker2D" parent="."]
 position = Vector2(58, 8)
+
+[node name="pause_menu" parent="." instance=ExtResource("37_w3t72")]
+visible = false
 
 [connection signal="body_entered" from="spike-area" to="spike-area" method="_on_body_entered"]
 [connection signal="timeout" from="HUD/control/clock_timer" to="HUD/control" method="_on_clock_timer_timeout"]
