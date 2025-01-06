@@ -1,8 +1,9 @@
-[gd_scene load_steps=14 format=3 uid="uid://dvjtd4r151hl5"]
+[gd_scene load_steps=15 format=3 uid="uid://dvjtd4r151hl5"]
 
 [ext_resource type="Texture2D" uid="uid://bkm41f8iy6y7y" path="res://assets/Mini FX, Items & UI/Common Pick-ups/Coin (16 x 16).png" id="1_45syy"]
 [ext_resource type="Script" path="res://scripts/coin.gd" id="1_w8o7g"]
 [ext_resource type="Texture2D" uid="uid://doml4s2ajpnu2" path="res://assets/Mini FX, Items & UI/Effects/Yellow_Sparkle (16 x 16).png" id="2_n4buq"]
+[ext_resource type="AudioStream" uid="uid://dkpjwjwkvtlke" path="res://sounds/collect_coin_sfx.wav" id="4_wvj8d"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_f70nw"]
 
@@ -86,6 +87,10 @@ shape = SubResource("CircleShape2D_f70nw")
 sprite_frames = SubResource("SpriteFrames_7pmsq")
 animation = &"idle"
 autoplay = "idle"
+
+[node name="coin_sfx" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_wvj8d")
+volume_db = -15.0
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="animation_finished" from="anime" to="." method="_on_anime_animation_finished"]

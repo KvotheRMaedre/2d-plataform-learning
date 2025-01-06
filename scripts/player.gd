@@ -8,6 +8,7 @@ const JUMP_VELOCITY = -300.0
 @onready var remote_transform := $remote as RemoteTransform2D
 @onready var raycast_right := $raycast_right as RayCast2D
 @onready var raycast_left := $raycast_left as RayCast2D
+@onready var jump_sfx := $jump_sfx as AudioStreamPlayer
 
 var knockback_vector := Vector2.ZERO
 var is_jumping := false
@@ -25,6 +26,7 @@ func _physics_process(delta: float) -> void:
 	if Input.is_action_just_pressed("ui_accept") and is_on_floor():
 		velocity.y = JUMP_VELOCITY
 		is_jumping = true
+		jump_sfx.play()
 	elif is_on_floor():
 		is_jumping = false
 		
@@ -99,6 +101,8 @@ func _on_head_collider_body_entered(body: Node2D) -> void:
 		if body.hitpoints >= 1:
 			body.hitpoints -= 1
 			body.animation.play("hit")
+			body.hit_sfx.play()
 		else:
+			body.break_sfx.play()
 			body.break_sprite()
 		body.create_coin()
