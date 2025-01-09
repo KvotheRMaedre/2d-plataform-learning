@@ -1,4 +1,4 @@
-[gd_scene load_steps=51 format=3 uid="uid://c4ghgvoq0q5wr"]
+[gd_scene load_steps=52 format=3 uid="uid://c0lvv1hrei6ye"]
 
 [ext_resource type="Script" path="res://scripts/world_01.gd" id="1_l545v"]
 [ext_resource type="Texture2D" uid="uid://cs1a0sytmp4yo" path="res://assets/Seasonal Tilesets/1 - Grassland/Terrain (16 x 16).png" id="2_m74jg"]
@@ -39,6 +39,7 @@
 [ext_resource type="Texture2D" uid="uid://deiwo5uigs4im" path="res://assets/Mini FX, Items & UI/Common Pick-ups/Life-Counter-Icon.png" id="37_cda4t"]
 [ext_resource type="PackedScene" uid="uid://cq8muiaenj6w4" path="res://prefabs/pause_menu.tscn" id="38_5gbbp"]
 [ext_resource type="PackedScene" uid="uid://bjrg6lbweeec4" path="res://prefabs/scene_transition.tscn" id="39_5aw61"]
+[ext_resource type="AudioStream" uid="uid://c3xrpdflj12ox" path="res://sounds/bg_music.wav" id="39_up3wd"]
 
 [sub_resource type="TileMapPattern" id="TileMapPattern_t5ild"]
 tile_data = PackedInt32Array(0, 65537, 1)
@@ -177,7 +178,7 @@ frame_2/duration = 1.0
 frame_3/texture = ExtResource("35_x5a36")
 frame_3/duration = 1.0
 
-[node name="World-02" type="Node2D"]
+[node name="World-01" type="Node2D"]
 script = ExtResource("1_l545v")
 
 [node name="level" type="TileMap" parent="."]
@@ -293,7 +294,7 @@ position = Vector2(546, 122)
 position = Vector2(58, 8)
 
 [node name="player" parent="." instance=ExtResource("14_je4h3")]
-position = Vector2(100, 127)
+position = Vector2(446, 130)
 
 [node name="camera" type="Camera2D" parent="."]
 zoom = Vector2(2, 2)
@@ -362,7 +363,7 @@ position = Vector2(683, 145)
 
 [node name="goal" parent="." instance=ExtResource("24_cm3gc")]
 position = Vector2(1085, 160)
-next_level = "res://levels/world_01.tscn"
+next_level = "res://levels/world_02.tscn"
 
 [node name="controls" type="CanvasLayer" parent="."]
 visible = false
@@ -422,15 +423,15 @@ size_flags_vertical = 0
 [node name="coins_icon" type="TextureRect" parent="HUD/control/container/coins_container"]
 layout_mode = 2
 size_flags_horizontal = 0
-size_flags_vertical = 0
 texture = SubResource("AnimatedTexture_janvu")
+expand_mode = 2
 
 [node name="coins_counter" type="Label" parent="HUD/control/container/coins_container"]
 layout_mode = 2
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 4
+theme_override_constants/outline_size = 8
 theme_override_fonts/font = ExtResource("36_q08xo")
-theme_override_font_sizes/font_size = 8
+theme_override_font_sizes/font_size = 16
 text = "0000"
 vertical_alignment = 1
 
@@ -442,18 +443,18 @@ size_flags_vertical = 0
 [node name="score_label" type="Label" parent="HUD/control/container/score_container"]
 layout_mode = 2
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 4
+theme_override_constants/outline_size = 8
 theme_override_fonts/font = ExtResource("36_q08xo")
-theme_override_font_sizes/font_size = 8
+theme_override_font_sizes/font_size = 16
 text = "SCORE:"
 vertical_alignment = 1
 
 [node name="score_counter" type="Label" parent="HUD/control/container/score_container"]
 layout_mode = 2
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 4
+theme_override_constants/outline_size = 8
 theme_override_fonts/font = ExtResource("36_q08xo")
-theme_override_font_sizes/font_size = 8
+theme_override_font_sizes/font_size = 16
 text = "000000"
 vertical_alignment = 1
 
@@ -465,18 +466,18 @@ size_flags_vertical = 0
 [node name="timer_label" type="Label" parent="HUD/control/container/timer_container"]
 layout_mode = 2
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 4
+theme_override_constants/outline_size = 8
 theme_override_fonts/font = ExtResource("36_q08xo")
-theme_override_font_sizes/font_size = 8
+theme_override_font_sizes/font_size = 16
 text = "TIME:"
 vertical_alignment = 1
 
 [node name="timer_counter" type="Label" parent="HUD/control/container/timer_container"]
 layout_mode = 2
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 4
+theme_override_constants/outline_size = 8
 theme_override_fonts/font = ExtResource("36_q08xo")
-theme_override_font_sizes/font_size = 8
+theme_override_font_sizes/font_size = 16
 text = "00:00"
 vertical_alignment = 1
 
@@ -487,30 +488,34 @@ size_flags_vertical = 8
 
 [node name="life_icon" type="TextureRect" parent="HUD/control/container/life_container"]
 layout_mode = 2
-size_flags_horizontal = 0
-size_flags_vertical = 0
 texture = ExtResource("37_cda4t")
+expand_mode = 2
 
 [node name="life_separator" type="Label" parent="HUD/control/container/life_container"]
 layout_mode = 2
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 4
+theme_override_constants/outline_size = 6
 theme_override_fonts/font = ExtResource("36_q08xo")
-theme_override_font_sizes/font_size = 8
+theme_override_font_sizes/font_size = 14
 text = "X"
 vertical_alignment = 1
 
 [node name="life_counter" type="Label" parent="HUD/control/container/life_container"]
 layout_mode = 2
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 4
+theme_override_constants/outline_size = 6
 theme_override_fonts/font = ExtResource("36_q08xo")
-theme_override_font_sizes/font_size = 8
+theme_override_font_sizes/font_size = 14
 text = "03"
 vertical_alignment = 1
 
 [node name="pause_menu" parent="." instance=ExtResource("38_5gbbp")]
 visible = false
+
+[node name="bg_music" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("39_up3wd")
+volume_db = -10.0
+autoplay = true
 
 [node name="scene_transition" parent="." instance=ExtResource("39_5aw61")]
 

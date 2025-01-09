@@ -5,9 +5,11 @@ extends Node2D
 @onready var camera := $camera as Camera2D
 @onready var control: Control = $HUD/control
 @onready var start_player_position: Marker2D = $start_player_position
+@onready var scene_transition: Node2D = $scene_transition
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	scene_transition.bg.color.a = 255
 	Globals.start_position = start_player_position
 	Globals.player = player
 	Globals.player.follow_camera(camera)
