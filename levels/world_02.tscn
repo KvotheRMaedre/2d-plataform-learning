@@ -1,4 +1,4 @@
-[gd_scene load_steps=54 format=3 uid="uid://c4ghgvoq0q5wr"]
+[gd_scene load_steps=51 format=3 uid="uid://c4ghgvoq0q5wr"]
 
 [ext_resource type="Script" path="res://scripts/world_01.gd" id="1_l545v"]
 [ext_resource type="Texture2D" uid="uid://cs1a0sytmp4yo" path="res://assets/Seasonal Tilesets/1 - Grassland/Terrain (16 x 16).png" id="2_m74jg"]
@@ -38,9 +38,7 @@
 [ext_resource type="FontFile" uid="uid://b3xf52ob2f75l" path="res://assets/font/RevMiniPixel.ttf" id="36_q08xo"]
 [ext_resource type="Texture2D" uid="uid://deiwo5uigs4im" path="res://assets/Mini FX, Items & UI/Common Pick-ups/Life-Counter-Icon.png" id="37_cda4t"]
 [ext_resource type="PackedScene" uid="uid://cq8muiaenj6w4" path="res://prefabs/pause_menu.tscn" id="38_5gbbp"]
-[ext_resource type="Script" path="res://levels/transition.gd" id="39_8bt82"]
-[ext_resource type="Shader" path="res://shaders/transition.gdshader" id="40_8r4jn"]
-[ext_resource type="Script" path="res://scripts/color_rect_transition.gd" id="41_ame0m"]
+[ext_resource type="PackedScene" uid="uid://bjrg6lbweeec4" path="res://prefabs/scene_transition.tscn" id="39_5aw61"]
 
 [sub_resource type="TileMapPattern" id="TileMapPattern_t5ild"]
 tile_data = PackedInt32Array(0, 65537, 1)
@@ -179,13 +177,6 @@ frame_2/duration = 1.0
 frame_3/texture = ExtResource("35_x5a36")
 frame_3/duration = 1.0
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_pliww"]
-shader = ExtResource("40_8r4jn")
-shader_parameter/lines = 10.0
-shader_parameter/threshold = 1.0
-shader_parameter/line_color_a = Color(0.262932, 0.262932, 0.262932, 0.87451)
-shader_parameter/line_color_b = Color(0.262745, 0.262745, 0.262745, 0.87451)
-
 [node name="World-02" type="Node2D"]
 script = ExtResource("1_l545v")
 
@@ -305,6 +296,7 @@ position = Vector2(58, 8)
 position = Vector2(100, 127)
 
 [node name="camera" type="Camera2D" parent="."]
+zoom = Vector2(2, 2)
 limit_left = 0
 limit_bottom = 300
 
@@ -520,19 +512,7 @@ vertical_alignment = 1
 [node name="pause_menu" parent="." instance=ExtResource("38_5gbbp")]
 visible = false
 
-[node name="transition" type="CanvasLayer" parent="."]
-visible = false
-script = ExtResource("39_8bt82")
-
-[node name="color_rect" type="ColorRect" parent="transition"]
-material = SubResource("ShaderMaterial_pliww")
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-color = Color(0.00184107, 0.00184107, 0.00184107, 1)
-script = ExtResource("41_ame0m")
+[node name="scene_transition" parent="." instance=ExtResource("39_5aw61")]
 
 [connection signal="body_entered" from="spike-area" to="spike-area" method="_on_body_entered"]
 [connection signal="timeout" from="HUD/control/clock_timer" to="HUD/control" method="_on_clock_timer_timeout"]
