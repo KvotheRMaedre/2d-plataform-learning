@@ -6,7 +6,6 @@ extends Node2D
 @onready var control: Control = $HUD/control
 @onready var start_player_position: Marker2D = $start_player_position
 @onready var scene_transition: Node2D = $scene_transition
-@onready var game_over_sfx: AudioStreamPlayer = $game_over_sfx
 @onready var bg_music: AudioStreamPlayer = $bg_music
 
 # Called when the node enters the scene tree for the first time.
@@ -33,7 +32,5 @@ func reload_game():
 	Globals.respawn_player()
 
 func game_over() -> void:
-	game_over_sfx.play()
-	await game_over_sfx.finished
 	Globals.reset()
 	get_tree().change_scene_to_file("res://scene/game_over.tscn")

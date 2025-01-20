@@ -1,4 +1,4 @@
-[gd_scene load_steps=53 format=3 uid="uid://6tk1j4efopug"]
+[gd_scene load_steps=52 format=3 uid="uid://6tk1j4efopug"]
 
 [ext_resource type="Texture2D" uid="uid://cs1a0sytmp4yo" path="res://assets/Seasonal Tilesets/1 - Grassland/Terrain (16 x 16).png" id="1_1aga6"]
 [ext_resource type="Script" path="res://scripts/world_01.gd" id="1_8vkiv"]
@@ -38,7 +38,6 @@
 [ext_resource type="PackedScene" uid="uid://byrm3x20mpceg" path="res://prefabs/checkpoint.tscn" id="36_cl3i3"]
 [ext_resource type="PackedScene" uid="uid://cq8muiaenj6w4" path="res://prefabs/pause_menu.tscn" id="37_w3t72"]
 [ext_resource type="PackedScene" uid="uid://cnq7boqh8lgh4" path="res://prefabs/goal.tscn" id="38_yauaq"]
-[ext_resource type="AudioStream" uid="uid://cncao54oi4jxf" path="res://sounds/8-bit-failure-sound.wav" id="41_j4mg5"]
 [ext_resource type="AudioStream" uid="uid://c3xrpdflj12ox" path="res://sounds/bg_music.wav" id="42_n6tui"]
 [ext_resource type="PackedScene" uid="uid://bjrg6lbweeec4" path="res://prefabs/scene_transition.tscn" id="43_0sdut"]
 
@@ -400,8 +399,6 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("26_x3ymd")
-default_minutes = 0
-default_seconds = 5
 
 [node name="clock_timer" type="Timer" parent="HUD/control"]
 autostart = true
@@ -521,10 +518,6 @@ volume_db = -10.0
 autoplay = true
 
 [node name="scene_transition" parent="." instance=ExtResource("43_0sdut")]
-
-[node name="game_over_sfx" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("41_j4mg5")
-volume_db = -10.0
 
 [connection signal="body_entered" from="spike-area" to="spike-area" method="_on_body_entered"]
 [connection signal="timeout" from="HUD/control/clock_timer" to="HUD/control" method="_on_clock_timer_timeout"]
