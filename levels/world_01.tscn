@@ -1,4 +1,4 @@
-[gd_scene load_steps=52 format=3 uid="uid://6tk1j4efopug"]
+[gd_scene load_steps=53 format=3 uid="uid://6tk1j4efopug"]
 
 [ext_resource type="Texture2D" uid="uid://cs1a0sytmp4yo" path="res://assets/Seasonal Tilesets/1 - Grassland/Terrain (16 x 16).png" id="1_1aga6"]
 [ext_resource type="Script" path="res://scripts/world_01.gd" id="1_8vkiv"]
@@ -37,6 +37,7 @@
 [ext_resource type="PackedScene" uid="uid://c4ir0ul6d3p52" path="res://actors/cherry.tscn" id="35_w5ucn"]
 [ext_resource type="PackedScene" uid="uid://byrm3x20mpceg" path="res://prefabs/checkpoint.tscn" id="36_cl3i3"]
 [ext_resource type="PackedScene" uid="uid://cq8muiaenj6w4" path="res://prefabs/pause_menu.tscn" id="37_w3t72"]
+[ext_resource type="PackedScene" uid="uid://8ay7kb27jb4t" path="res://actors/trex.tscn" id="38_oioci"]
 [ext_resource type="PackedScene" uid="uid://cnq7boqh8lgh4" path="res://prefabs/goal.tscn" id="38_yauaq"]
 [ext_resource type="AudioStream" uid="uid://c3xrpdflj12ox" path="res://sounds/bg_music.wav" id="42_n6tui"]
 [ext_resource type="PackedScene" uid="uid://bjrg6lbweeec4" path="res://prefabs/scene_transition.tscn" id="43_0sdut"]
@@ -316,6 +317,10 @@ enemy_points = 200
 [node name="enemy4" parent="enemies" instance=ExtResource("12_nl065")]
 position = Vector2(175, 153)
 enemy_points = 200
+
+[node name="trex" parent="enemies" node_paths=PackedStringArray("target") instance=ExtResource("38_oioci")]
+position = Vector2(407, 142)
+target = NodePath("../../player")
 
 [node name="breakable-box" parent="." instance=ExtResource("20_fee6q")]
 position = Vector2(402, 109)

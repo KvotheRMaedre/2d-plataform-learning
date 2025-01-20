@@ -66,13 +66,16 @@ func _physics_process(delta: float) -> void:
 		if collision.get_collider().has_method("has_collided_with"):
 			collision.get_collider().has_collided_with(collision, self)
 
-func _on_hurtbox_body_entered(_body: Node2D) -> void:
+func _on_hurtbox_body_entered(body: Node2D) -> void:
 	if raycast_right.is_colliding():
 		take_damage(Vector2(-200,-200))
 	elif raycast_left.is_colliding():
 		take_damage(Vector2(200,-200))
 	else:
 		take_damage(Vector2(200,-200))
+		
+	if body.is_in_group("fireball"):
+		body.queue_free()
 
 func follow_camera(camera):
 	var camera_path = camera.get_path()
