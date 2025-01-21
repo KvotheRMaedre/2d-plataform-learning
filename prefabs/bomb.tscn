@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=3 uid="uid://ms210hyvuusc"]
+
+[ext_resource type="Texture2D" uid="uid://ccvcc6x83fwx3" path="res://assets/Sprite Pack 2/8 - Comrade Cheese Puff/Dropped_Bomb (8 x 8).png" id="1_gd1ap"]
+[ext_resource type="Script" path="res://scripts/bomb.gd" id="1_jvfmg"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_o45jr"]
+radius = 4.0
+
+[node name="bomb" type="RigidBody2D"]
+collision_layer = 8
+collision_mask = 3
+contact_monitor = true
+max_contacts_reported = 1
+script = ExtResource("1_jvfmg")
+
+[node name="collision" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_o45jr")
+
+[node name="sprite" type="Sprite2D" parent="."]
+texture = ExtResource("1_gd1ap")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
