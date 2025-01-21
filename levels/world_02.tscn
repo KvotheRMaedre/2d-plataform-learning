@@ -1,4 +1,4 @@
-[gd_scene load_steps=40 format=3 uid="uid://c0lvv1hrei6ye"]
+[gd_scene load_steps=41 format=3 uid="uid://c0lvv1hrei6ye"]
 
 [ext_resource type="Script" path="res://scripts/world_01.gd" id="1_l545v"]
 [ext_resource type="Texture2D" uid="uid://cs1a0sytmp4yo" path="res://assets/Seasonal Tilesets/1 - Grassland/Terrain (16 x 16).png" id="2_m74jg"]
@@ -11,6 +11,7 @@
 [ext_resource type="Texture2D" uid="uid://b5wrevey306ko" path="res://assets/Seasonal Tilesets/1 - Grassland/Background parts/2 - Hills.png" id="9_bhsd2"]
 [ext_resource type="Texture2D" uid="uid://7il8jhsyfx6t" path="res://assets/Seasonal Tilesets/1 - Grassland/Background parts/1 - Foreground_scenery.png" id="10_3fkge"]
 [ext_resource type="PackedScene" uid="uid://dvjtd4r151hl5" path="res://prefabs/coin.tscn" id="11_n5v3n"]
+[ext_resource type="PackedScene" uid="uid://cn8dwjohx1e3i" path="res://actors/tank_cheese_puff.tscn" id="13_7shu3"]
 [ext_resource type="PackedScene" uid="uid://qga0inchn5hm" path="res://actors/player.tscn" id="14_je4h3"]
 [ext_resource type="PackedScene" uid="uid://bkrqqqgjpxhlu" path="res://actors/enemy.tscn" id="15_wsrqr"]
 [ext_resource type="PackedScene" uid="uid://cnq7boqh8lgh4" path="res://prefabs/goal.tscn" id="24_cm3gc"]
@@ -250,7 +251,7 @@ limit_left = 0
 limit_bottom = 300
 
 [node name="player" parent="." instance=ExtResource("14_je4h3")]
-position = Vector2(57, 128)
+position = Vector2(519, 123)
 
 [node name="enemies" type="Node2D" parent="."]
 
@@ -259,6 +260,9 @@ position = Vector2(249, 63)
 
 [node name="enemy2" parent="enemies" instance=ExtResource("15_wsrqr")]
 position = Vector2(294, 142)
+
+[node name="TankCheesePuff" parent="enemies" instance=ExtResource("13_7shu3")]
+position = Vector2(702, 145)
 
 [node name="coins" type="Node2D" parent="."]
 
