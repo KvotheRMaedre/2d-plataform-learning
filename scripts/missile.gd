@@ -4,6 +4,8 @@ const SPEED := 100.0
 const EXPLOSION = preload("res://prefabs/explosion.tscn")
 
 @onready var sprite: Sprite2D = $sprite
+@onready var collision: CollisionShape2D = $collision
+@onready var collision_detection: CollisionShape2D = $collision_detection/collision
 
 var velocity := Vector2.ZERO
 var direction
@@ -26,5 +28,7 @@ func _on_collision_detection_body_entered(_body: Node2D) -> void:
 	get_parent().add_child(explosion_instance)
 	explosion_instance.global_position = global_position
 	sprite.visible = false
+	collision.set_deferred("disabled", true)
+	collision_detection.set_deferred("disabled", true)
 	await explosion_instance.animation_finished
 	queue_free()

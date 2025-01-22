@@ -6,6 +6,21 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ienxo"]
 size = Vector2(27, 19)
 
+[sub_resource type="Animation" id="Animation_m1m2d"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
 [sub_resource type="Animation" id="Animation_2n4s6"]
 resource_name = "patrol"
 length = 0.2
@@ -21,21 +36,6 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
 "values": [0, 1]
-}
-
-[sub_resource type="Animation" id="Animation_m1m2d"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("sprite:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [0]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_ax55d"]
@@ -55,9 +55,11 @@ texture = ExtResource("1_pj4mc")
 hframes = 12
 
 [node name="missile_spawn_point" type="Marker2D" parent="sprite"]
+unique_name_in_owner = true
 position = Vector2(0, 6)
 
 [node name="bomb_spawn_point" type="Marker2D" parent="sprite"]
+unique_name_in_owner = true
 
 [node name="collision" type="CollisionShape2D" parent="."]
 position = Vector2(-0.5, -9.5)
@@ -72,10 +74,17 @@ autoplay = "patrol"
 [node name="anim_tree" type="AnimationTree" parent="."]
 
 [node name="bomb_cooldown" type="Timer" parent="."]
+wait_time = 3.0
+autostart = true
 
 [node name="missile_cooldown" type="Timer" parent="."]
+wait_time = 2.0
+autostart = true
 
 [node name="wall_detector" type="RayCast2D" parent="."]
 position = Vector2(0, -11)
 target_position = Vector2(-16, 0)
 collision_mask = 2
+
+[connection signal="timeout" from="bomb_cooldown" to="." method="_on_bomb_cooldown_timeout"]
+[connection signal="timeout" from="missile_cooldown" to="." method="_on_missile_cooldown_timeout"]
