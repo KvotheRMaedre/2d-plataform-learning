@@ -24,11 +24,11 @@ func set_direction(dir) -> void:
 		sprite.flip_h = false
 
 func _on_collision_detection_body_entered(_body: Node2D) -> void:
+	visible = false
+	collision.set_deferred("disabled", true)
+	collision_detection.set_deferred("disabled", true)
 	var explosion_instance = EXPLOSION.instantiate()
 	get_parent().add_child(explosion_instance)
 	explosion_instance.global_position = global_position
-	sprite.visible = false
-	collision.set_deferred("disabled", true)
-	collision_detection.set_deferred("disabled", true)
 	await explosion_instance.animation_finished
 	queue_free()

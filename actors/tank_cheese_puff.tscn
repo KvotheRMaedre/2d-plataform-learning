@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://cn8dwjohx1e3i"]
+[gd_scene load_steps=29 format=3 uid="uid://cn8dwjohx1e3i"]
 
 [ext_resource type="Script" path="res://scripts/tank_cheese_puff.gd" id="1_j4jtj"]
 [ext_resource type="Texture2D" uid="uid://uaybfxgs6q77" path="res://assets/Sprite Pack 2/8 - Comrade Cheese Puff/Tank_Movement (32 x 32).png" id="1_pj4mc"]
@@ -38,11 +38,171 @@ tracks/0/keys = {
 "values": [0, 1]
 }
 
+[sub_resource type="Animation" id="Animation_rbft1"]
+resource_name = "enter_scene"
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(-0.00203761, 0.0979624, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [7, 8, 7, 8, 7, 8, 7, 8, 7, 8]
+}
+
+[sub_resource type="Animation" id="Animation_p4x74"]
+resource_name = "hide_bomb"
+length = 0.6
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [2, 3, 4, 5, 6, 7]
+}
+
+[sub_resource type="Animation" id="Animation_p5quy"]
+resource_name = "show_reveal"
+length = 0.6
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [7, 6, 5, 4, 3, 2]
+}
+
+[sub_resource type="Animation" id="Animation_y3ojs"]
+resource_name = "missile_attack"
+length = 0.1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1]
+}
+
+[sub_resource type="Animation" id="Animation_4isjs"]
+resource_name = "vulnerable"
+length = 0.1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [10]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_ax55d"]
 _data = {
 "RESET": SubResource("Animation_m1m2d"),
-"patrol": SubResource("Animation_2n4s6")
+"enter_scene": SubResource("Animation_rbft1"),
+"hide_bomb": SubResource("Animation_p4x74"),
+"missile_attack": SubResource("Animation_y3ojs"),
+"patrol": SubResource("Animation_2n4s6"),
+"show_reveal": SubResource("Animation_p5quy"),
+"vulnerable": SubResource("Animation_4isjs")
 }
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_l8al0"]
+animation = &"enter_scene"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_4rwai"]
+animation = &"hide_bomb"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_afo7u"]
+animation = &"missile_attack"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_hrayj"]
+animation = &"patrol"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_xpmeu"]
+animation = &"show_reveal"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_ydit3"]
+animation = &"vulnerable"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_aq0fw"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_frp8x"]
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_ajcx1"]
+advance_mode = 2
+advance_condition = &"can_move"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_giseb"]
+advance_mode = 2
+advance_condition = &"time_missile"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_v4fgl"]
+advance_mode = 2
+advance_condition = &"can_move"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_4gfil"]
+advance_mode = 2
+advance_condition = &"time_bomb"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_tgxs6"]
+advance_mode = 2
+advance_condition = &"is_vulnerable"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_35ogw"]
+advance_mode = 2
+advance_condition = &"can_move"
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_kg6dv"]
+states/enter_scene/node = SubResource("AnimationNodeAnimation_l8al0")
+states/enter_scene/position = Vector2(309, 100)
+states/hide_bomb/node = SubResource("AnimationNodeAnimation_4rwai")
+states/hide_bomb/position = Vector2(653, 194)
+states/missile_attack/node = SubResource("AnimationNodeAnimation_afo7u")
+states/missile_attack/position = Vector2(476, 194)
+states/patrol/node = SubResource("AnimationNodeAnimation_hrayj")
+states/patrol/position = Vector2(545, 100)
+states/show_reveal/node = SubResource("AnimationNodeAnimation_xpmeu")
+states/show_reveal/position = Vector2(436, 100)
+states/vulnerable/node = SubResource("AnimationNodeAnimation_ydit3")
+states/vulnerable/position = Vector2(815, 194)
+transitions = ["Start", "enter_scene", SubResource("AnimationNodeStateMachineTransition_aq0fw"), "enter_scene", "show_reveal", SubResource("AnimationNodeStateMachineTransition_frp8x"), "show_reveal", "patrol", SubResource("AnimationNodeStateMachineTransition_ajcx1"), "patrol", "missile_attack", SubResource("AnimationNodeStateMachineTransition_giseb"), "missile_attack", "patrol", SubResource("AnimationNodeStateMachineTransition_v4fgl"), "missile_attack", "hide_bomb", SubResource("AnimationNodeStateMachineTransition_4gfil"), "hide_bomb", "vulnerable", SubResource("AnimationNodeStateMachineTransition_tgxs6"), "vulnerable", "patrol", SubResource("AnimationNodeStateMachineTransition_35ogw")]
+graph_offset = Vector2(70.875, 39.3125)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ti17n"]
+size = Vector2(18.5, 4)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_f1rua"]
+size = Vector2(82, 20)
 
 [node name="TankCheesePuff" type="CharacterBody2D"]
 collision_layer = 4
@@ -72,19 +232,44 @@ libraries = {
 autoplay = "patrol"
 
 [node name="anim_tree" type="AnimationTree" parent="."]
+tree_root = SubResource("AnimationNodeStateMachine_kg6dv")
+anim_player = NodePath("../anim_player")
+parameters/conditions/can_move = false
+parameters/conditions/is_vulnerable = false
+parameters/conditions/time_bomb = false
+parameters/conditions/time_missile = true
 
 [node name="bomb_cooldown" type="Timer" parent="."]
-wait_time = 3.0
-autostart = true
 
 [node name="missile_cooldown" type="Timer" parent="."]
-wait_time = 2.0
-autostart = true
+wait_time = 2.5
 
 [node name="wall_detector" type="RayCast2D" parent="."]
 position = Vector2(0, -11)
 target_position = Vector2(-16, 0)
 collision_mask = 2
 
+[node name="hurtbox" type="Area2D" parent="."]
+collision_layer = 4
+
+[node name="collision_hurtbox" type="CollisionShape2D" parent="hurtbox"]
+position = Vector2(-1.5, -19)
+shape = SubResource("RectangleShape2D_ti17n")
+disabled = true
+debug_color = Color(1, 0.352941, 0.160784, 0.556863)
+
+[node name="player_detection" type="Area2D" parent="."]
+
+[node name="collision_player_detection" type="CollisionShape2D" parent="player_detection"]
+position = Vector2(0, -9)
+shape = SubResource("RectangleShape2D_f1rua")
+debug_color = Color(0, 0.6, 0.223529, 0.47451)
+
+[node name="VisibleOnScreenEnabler2D" type="VisibleOnScreenEnabler2D" parent="."]
+position = Vector2(-1, -9)
+
 [connection signal="timeout" from="bomb_cooldown" to="." method="_on_bomb_cooldown_timeout"]
 [connection signal="timeout" from="missile_cooldown" to="." method="_on_missile_cooldown_timeout"]
+[connection signal="body_entered" from="hurtbox" to="." method="_on_hurtbox_body_entered"]
+[connection signal="body_entered" from="player_detection" to="." method="_on_player_detection_body_entered"]
+[connection signal="screen_entered" from="VisibleOnScreenEnabler2D" to="." method="_on_visible_on_screen_enabler_2d_screen_entered"]
