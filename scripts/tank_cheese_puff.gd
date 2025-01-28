@@ -2,6 +2,7 @@ extends CharacterBody2D
 
 const MISSILE := preload("res://prefabs/missile.tscn")
 const BOMB := preload("res://prefabs/bomb.tscn")
+const BOSS_LOOSING := preload("res://prefabs/tank_cheese_loosing.tscn")
 const SPEED = 5000.0
 
 @onready var wall_detector = $wall_detector
@@ -10,13 +11,16 @@ const SPEED = 5000.0
 @onready var bomb_spawn_point: Marker2D = %bomb_spawn_point
 @onready var anim_tree: AnimationTree = $anim_tree
 @onready var state_machine = anim_tree["parameters/playback"]
+@onready var loosing_boss_spawn: Marker2D = $loosing_boss_spawn
+
 
 var direction = -1
+var lifes = 1
 
 #Flags
 var turn_count := 0
-var missile_count := 0
-var bomb_count := 0
+var missile_count := 4
+var bomb_count := 3
 var can_launch_missile := true
 var can_throw_bomb := true
 var got_hit := false
@@ -61,7 +65,7 @@ func _physics_process(delta: float) -> void:
 			got_hit = false
 			$hurtbox/collision_hurtbox.set_deferred("disabled", false)
 	
-	if turn_count <= 2:
+	if turn_count <= 0:
 		anim_tree.set("parameters/conditions/can_move", true)
 		anim_tree.set("parameters/conditions/time_missile", false)
 	elif missile_count >= 4:
@@ -75,6 +79,10 @@ func _physics_process(delta: float) -> void:
 		anim_tree.set("parameters/conditions/is_vulnerable", false)
 		anim_tree.set("parameters/conditions/time_bomb", false)
 		anim_tree.set("parameters/conditions/time_missile", true)
+	
+	if lifes <= 0:
+		state_machine.travel("death")
+		$hurtbox/collision_hurtbox.set_deferred("disabled", true)
 
 func throw_bomb():
 	if bomb_count <= 3:
@@ -110,3 +118,9 @@ func _on_hurtbox_body_entered(body: Node2D) -> void:
 	body.velocity = Vector2(50,-300)
 	got_hit = true
 	turn_count = 0
+	lifes -= 1
+
+func create_loosing_boss():
+	var boss_loosing = BOSS_LOOSING.instantiate()
+	add_child(boss_loosing)
+	boss_loosing.global_position = loosing_boss_spawn.global_position

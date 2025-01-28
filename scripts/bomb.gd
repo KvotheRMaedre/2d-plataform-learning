@@ -4,7 +4,10 @@ const EXPLOSION = preload("res://prefabs/explosion.tscn")
 @onready var sprite: Sprite2D = $sprite
 @onready var collision: CollisionShape2D = $collision
 
-func _on_body_entered(_body: Node) -> void:
+func _on_body_entered(body: Node) -> void:
+	if body.name == "player":
+		body.take_damage(Vector2(200,-200))
+		
 	sprite.visible = false
 	var explosion_instance = EXPLOSION.instantiate()
 	get_parent().add_child(explosion_instance)

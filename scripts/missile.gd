@@ -23,7 +23,9 @@ func set_direction(dir) -> void:
 	else:
 		sprite.flip_h = false
 
-func _on_collision_detection_body_entered(_body: Node2D) -> void:
+func _on_collision_detection_body_entered(body: Node2D) -> void:
+	if body.name == "player":
+		body.take_damage(Vector2(200,-200))
 	visible = false
 	collision.set_deferred("disabled", true)
 	collision_detection.set_deferred("disabled", true)
