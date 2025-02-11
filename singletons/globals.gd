@@ -14,7 +14,6 @@ func reset() -> void:
 	player_life = 3
 
 func respawn_player() -> void:
-	player_life = 3
 	if current_checkpoint != null:
 		player.position = current_checkpoint.global_position
 	else:

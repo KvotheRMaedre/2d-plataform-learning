@@ -14,7 +14,7 @@ func _ready() -> void:
 	Globals.start_position = start_player_position
 	Globals.player = player
 	Globals.player.follow_camera(camera)
-	Globals.player.player_has_died.connect(reload_game)
+	Globals.player.player_has_died.connect(game_over)
 	control.time_is_up.connect(game_over)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -28,7 +28,7 @@ func reload_game():
 	add_child(player)
 	Globals.player = player
 	Globals.player.follow_camera(camera)
-	Globals.player.player_has_died.connect(reload_game)
+	Globals.player.player_has_died.connect(game_over)
 	Globals.respawn_player()
 
 func game_over() -> void:

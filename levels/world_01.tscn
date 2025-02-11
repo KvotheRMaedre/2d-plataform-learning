@@ -1,4 +1,4 @@
-[gd_scene load_steps=53 format=3 uid="uid://6tk1j4efopug"]
+[gd_scene load_steps=55 format=3 uid="uid://6tk1j4efopug"]
 
 [ext_resource type="Texture2D" uid="uid://cs1a0sytmp4yo" path="res://assets/Seasonal Tilesets/1 - Grassland/Terrain (16 x 16).png" id="1_1aga6"]
 [ext_resource type="Script" path="res://scripts/world_01.gd" id="1_8vkiv"]
@@ -39,6 +39,7 @@
 [ext_resource type="PackedScene" uid="uid://cq8muiaenj6w4" path="res://prefabs/pause_menu.tscn" id="37_w3t72"]
 [ext_resource type="PackedScene" uid="uid://8ay7kb27jb4t" path="res://actors/trex.tscn" id="38_oioci"]
 [ext_resource type="PackedScene" uid="uid://cnq7boqh8lgh4" path="res://prefabs/goal.tscn" id="38_yauaq"]
+[ext_resource type="PackedScene" uid="uid://08wkqvcl34rt" path="res://prefabs/fallzone.tscn" id="42_cgde1"]
 [ext_resource type="AudioStream" uid="uid://c3xrpdflj12ox" path="res://sounds/bg_music.wav" id="42_n6tui"]
 [ext_resource type="PackedScene" uid="uid://bjrg6lbweeec4" path="res://prefabs/scene_transition.tscn" id="43_0sdut"]
 
@@ -178,6 +179,9 @@ frame_2/texture = ExtResource("28_2gl0y")
 frame_2/duration = 1.0
 frame_3/texture = ExtResource("29_2ia4s")
 frame_3/duration = 1.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0cpg6"]
+size = Vector2(275, 20)
 
 [node name="World-01" type="Node2D"]
 script = ExtResource("1_8vkiv")
@@ -523,6 +527,13 @@ volume_db = -10.0
 autoplay = true
 
 [node name="scene_transition" parent="." instance=ExtResource("43_0sdut")]
+
+[node name="fallzone" parent="." instance=ExtResource("42_cgde1")]
+position = Vector2(848, 196)
+
+[node name="colission" type="CollisionShape2D" parent="fallzone"]
+position = Vector2(-1, 31)
+shape = SubResource("RectangleShape2D_0cpg6")
 
 [connection signal="body_entered" from="spike-area" to="spike-area" method="_on_body_entered"]
 [connection signal="timeout" from="HUD/control/clock_timer" to="HUD/control" method="_on_clock_timer_timeout"]

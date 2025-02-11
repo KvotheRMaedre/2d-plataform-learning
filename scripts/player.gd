@@ -9,6 +9,7 @@ const AIR_FRICTION := 0.5
 @onready var raycast_right := $raycast_right as RayCast2D
 @onready var raycast_left := $raycast_left as RayCast2D
 @onready var jump_sfx := $jump_sfx as AudioStreamPlayer
+@onready var start_player_position: Marker2D = $"../start_player_position"
 
 var knockback_vector := Vector2.ZERO
 var is_jumping := false
@@ -81,13 +82,7 @@ func follow_camera(camera):
 	var camera_path = camera.get_path()
 	remote_transform.remote_path = camera_path
 
-func take_damage(knockback_force := Vector2.ZERO, duration := 0.25):
-	if Globals.player_life > 0:
-		Globals.player_life -= 1
-	else:
-		queue_free()
-		emit_signal("player_has_died")
-	
+func take_damage(knockback_force := Vector2.ZERO, duration := 0.25):	
 	if knockback_force != Vector2.ZERO:
 		knockback_vector = knockback_force
 		
@@ -100,6 +95,12 @@ func take_damage(knockback_force := Vector2.ZERO, duration := 0.25):
 		await get_tree().create_timer(.3).timeout
 		is_hurted = false
 		
+	if Globals.player_life > 0:
+		Globals.player_life -= 1
+	else:
+		queue_free()
+		emit_signal("player_has_died")
+
 func _set_state():
 	var state = "idle"
 
@@ -124,3 +125,22 @@ func _on_head_collider_body_entered(body: Node2D) -> void:
 			body.break_sfx.play()
 			body.break_sprite()
 		body.create_coin()
+
+func handle_death_zone():
+	if Globals.player_life > 0:
+		Globals.player_life -= 1
+		visible = false
+		set_physics_process(false)
+		
+		await get_tree().create_timer(1.0).timeout
+		Globals.respawn_player()
+		
+		visible = true
+		set_physics_process(true)
+	else:
+		visible = false
+		set_physics_process(false)
+		await get_tree().create_timer(0.5).timeout
+		emit_signal("player_has_died")
+		
+	
